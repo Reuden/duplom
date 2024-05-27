@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express');
 const app = express();
 require('dotenv').config();
@@ -11,7 +11,7 @@ app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Food Monster Server is Running');
-})
+});
 
 // MongoDB конфігурація
 const uri = process.env.MONGODB_URI || "mongodb+srv://min30032000:2FMlFT3zIq7D0Jtu@cluster0.yct9ofw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -35,7 +35,7 @@ function verifyJWT(req, res, next) {
         }
         req.decoded = decoded;
         next();
-    })
+    });
 }
 
 async function run() {
@@ -79,7 +79,7 @@ async function run() {
 
         app.get('/services/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id: ObjectId(id) };
+            const query = { _id: id }; // Використовуємо рядковий ідентифікатор без конвертації
             const service = await serviceCollection.findOne(query);
             res.send(service);
         });
@@ -123,7 +123,7 @@ async function run() {
 
         app.delete('/reviews/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id: ObjectId(id) };
+            const query = { _id: id };
             const result = await reviewCollection.deleteOne(query);
             res.send(result);
         });
