@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 // MongoDB конфігурація
-const uri = process.env.MONGODB_URI || "mongodb+srv://min30032000:2FMlFT3zIq7D0Jtu@cluster0.yct9ofw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MONGODB_URI || "";
 const client = new MongoClient(uri, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
